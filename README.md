@@ -11,7 +11,7 @@ sequences (`array.tolist()` for external array libraries).
 
 ## Installation and minimal example
 
-From this source candidate, in a separate environment:
+From the repository root, in a separate environment:
 
 ```bash
 python3 -m venv .venv
@@ -74,8 +74,9 @@ mypy
 python -m unittest discover -s tests -v
 ```
 
-CPU CI is prepared to build an sdist and its wheel, install it, run tests/example
-outside the checkout, and run lint/type checks. No GitHub workflow has run for this unpublished candidate. Tests include
+CPU CI builds an sdist and its wheel, installs it, runs tests/example outside the
+checkout, and runs lint/type checks. The [verified publication run](https://github.com/Bhuvanlakhera23/robot-policy-tools/actions/runs/43023067171)
+passed on commit `08cb53fb71710583f80e45ef14dafe819c2adb34` for Python 3.10 and 3.12. Tests include
 independent polynomial/affine oracles and deterministic randomized invariants;
 all fixtures are synthetic.
 

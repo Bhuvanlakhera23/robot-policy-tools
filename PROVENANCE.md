@@ -11,12 +11,14 @@ The independent root Git history begins with this new package. It was not used
 to generate earlier published locomotion benchmarks. The example is deterministic
 synthetic data and makes no robot-performance claim.
 
-Name: `robot-policy-tools` is provisional and descriptive, not an endorsement or
-claim of affiliation. An initial exact-name search did not identify an obvious
-same-name project; registry availability/trademark clearance is unestablished.
-Do not upload under this name without owner review.
+`robot-policy-tools` was published on GitHub with explicit owner authorization:
+[Bhuvanlakhera23/robot-policy-tools](https://github.com/Bhuvanlakhera23/robot-policy-tools).
+The owner confirmed applicable institutional/employment authority and selected MIT,
+copyright 2026 Bhuvan Lakhera. The project is independent and unaffiliated with
+robot manufacturers. GitHub publication does not reserve a package-registry name
+or establish trademark clearance; no PyPI package was published.
 
 First-party source and documentation use MIT; see LICENSE. Source-rights, license
-and exact-content publication authority must be recorded in the owner release
+and exact-content publication authority are recorded in the owner release
 receipt. This grant does not cover excluded research artifacts or third-party
 software. `RELEASE_BOUNDARY.json` records the release scope.
