@@ -147,3 +147,16 @@ class Metrics(unittest.TestCase):
         self.assertEqual(summary["turn"]["count"], 2)
         self.assertEqual(summary["flat"]["mean_abs_by_axis"], (0.0,))
         self.assertEqual(summary["turn"]["mean_abs_by_axis"], (2.0,))
+
+    def test_large_representable_means_do_not_overflow(self):
+        command = scalar([1e308, 1e308])
+        result = tracking_mae(command, scalar([0.0, 0.0]))
+        self.assertEqual(result["all"], (1e308,))
+        self.assertEqual(result["axis_0/positive"], (1e308,))
+        self.assertEqual(mean_square(scalar([1e154, 1e154])), (1e308,))
+
+    def test_sample_weighting_is_not_episode_weighting(self):
+        command = scalar([0.0] * 4, segments=("a", "b", "b", "b"))
+        measured = scalar([4.0, 0.0, 0.0, 0.0], segments=("a", "b", "b", "b"))
+        # Sample mean 4/4=1; averaging the two episode means would give 2.
+        self.assertEqual(tracking_mae(command, measured)["all"], (1.0,))

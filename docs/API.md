@@ -67,7 +67,8 @@ For raw actions use a declared raw unit; for applied position targets use `rad`.
 Differentiating raw actions describes that signal only. These are no direct
 measurements of physical joint acceleration, energy, stability, wear or safety.
 
-Overflow/nonfinite summaries fail. No confidence interval, policy ranking, learned
+Unrepresentable products/differences and nonfinite summaries fail. Finite means
+use magnitude normalization to avoid overflow of an otherwise representable mean. No confidence interval, policy ranking, learned
 skill or actuator acceptance is computed. No SciPy/NumPy derivative implementation
 or private evaluation algorithm is borrowed; the finite-difference formula is an
 independently implemented generic mathematical definition.

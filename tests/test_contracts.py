@@ -114,3 +114,17 @@ class Contracts(unittest.TestCase):
             self.assertTrue(all(math.isfinite(x) for x in targets))
             self.assertAlmostEqual(targets[0], 1 + 0.5 * max(-1, min(1, raw[0])))
             self.assertAlmostEqual(targets[1], 0.25 - 2 * max(-1, min(1, raw[1])))
+
+    def test_clip_bounds_and_identity_scaling(self):
+        c = PolicyContract(
+            (Feature("x", 1, "raw"),),
+            ActionSpec(("a",), (1.0,), (0.0,), clip_raw=(-1.0, 1.0)),
+        )
+        for raw, expected in ((-2.0, -1.0), (-1.0, -1.0), (0.0, 0.0), (1.0, 1.0), (2.0, 1.0)):
+            self.assertEqual(
+                c.joint_targets([[raw]], joint_names=("a",), unit="dimensionless"),
+                ((expected,),),
+            )
+        for limits in ((0.0, 0.0), (float("nan"), 1.0), (-1.0, float("inf"))):
+            with self.assertRaises(ValueError):
+                ActionSpec(("a",), (1.0,), (0.0,), clip_raw=limits)

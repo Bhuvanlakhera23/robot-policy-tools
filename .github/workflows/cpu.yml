@@ -16,11 +16,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m pip install setuptools wheel -r requirements-dev.txt
-      - run: python -m pip wheel --no-deps --no-build-isolation --wheel-dir dist .
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m build --no-isolation
       - run: python -m pip install --no-deps dist/*.whl
-      - run: python -m unittest discover -s tests -v
-      - run: python examples/synthetic.py
+      - name: Test installed wheel outside checkout
+        shell: bash
+        run: |
+          CHECK_DIR=$(mktemp -d)
+          cp -r tests "$CHECK_DIR/tests"
+          cp examples/synthetic.py "$CHECK_DIR/synthetic.py"
+          cd "$CHECK_DIR"
+          python -m unittest discover -s tests -v
+          python synthetic.py
       - run: ruff check .
       - run: ruff format --check .
       - run: mypy

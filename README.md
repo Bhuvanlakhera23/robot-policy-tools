@@ -10,7 +10,7 @@ The working name is provisional, unaffiliated and not a registry reservation.
 Runtime dependencies: Python 3.10+ standard library only. Inputs are nested Python
 sequences (`array.tolist()` for external array libraries).
 
-## Install and run the synthetic example
+## Installation and minimal example
 
 From this source candidate, in a separate environment:
 
@@ -61,7 +61,26 @@ targets = contract.joint_targets(
 missing-data behavior and short-sequence semantics. No history buffer or temporal
 encoder is implemented. A signal is not a policy or physical actuator model.
 
-## Validation limits
+## Tests and development
+
+Build, lint and type tools are pinned in `requirements-dev.txt`; they are not runtime
+requirements. Install them explicitly in a separate development environment:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m build --no-isolation
+ruff check .
+ruff format --check .
+mypy
+python -m unittest discover -s tests -v
+```
+
+CPU CI is prepared to build an sdist and its wheel, install it, run tests/example
+outside the checkout, and run lint/type checks. No GitHub workflow has run for this unpublished candidate. Tests include
+independent polynomial/affine oracles and deterministic randomized invariants;
+all fixtures are synthetic.
+
+## Scope and limitations
 
 The caller must declare units, coordinate frames, joint correspondence and a
 common clock truthfully. This package validates their schema, not sensor truth,
@@ -75,20 +94,10 @@ is a proxy, not measured electrical energy, motor wear or hardware lifetime.
 Sample averages are not equal-episode averages when episodes differ in length.
 A contract passing does not authorize actuation or prove an actuator received it.
 
-## Development
+## License and attribution
 
-Development-only tools: Ruff 0.11.13 and mypy 1.15.0. They are not runtime
-requirements. Once installed explicitly in a development environment:
-
-```bash
-ruff check .
-ruff format --check .
-mypy
-python -m unittest discover -s tests -v
-```
-
-CPU CI is prepared to build a wheel, install it, run tests/example and lint/type
-checks. No GitHub workflow has run for this unpublished candidate. Tests include
-independent polynomial/affine oracles and deterministic randomized invariants;
-all fixtures are synthetic. [Provenance and rights](PROVENANCE.md) ·
+No first-party license is granted for this local candidate. MIT is recommended,
+subject to explicit owner/institutional source-rights and publication approval.
+No third-party source is vendored. See [provenance](PROVENANCE.md),
+[license recommendation](LICENSE_RECOMMENDATION.md) and
 [release boundary](RELEASE_BOUNDARY.json). `approved_for_actuation: false`.

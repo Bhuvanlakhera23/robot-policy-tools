@@ -67,8 +67,17 @@ class DifferenceSummary:
     max_abs_by_axis: tuple[float, ...] | None
 
 
+def _average(values: Sequence[float]) -> float:
+    # Normalize before summation: a representable mean must not fail merely
+    # because its unnormalized sum exceeds the floating-point range.
+    scale = max(abs(x) for x in values)
+    if scale == 0:
+        return 0.0
+    return finite(scale * (math.fsum(x / scale for x in values) / len(values)), "mean")
+
+
 def _mean(rows: Sequence[Sequence[float]]) -> tuple[float, ...]:
-    return tuple(math.fsum(row[j] for row in rows) / len(rows) for j in range(len(rows[0])))
+    return tuple(_average(tuple(row[j] for row in rows)) for j in range(len(rows[0])))
 
 
 def mean_square(signal: Signal) -> tuple[float, ...]:
@@ -140,7 +149,7 @@ def tracking_mae(command: Signal, measured: Signal) -> dict[str, tuple[float, ..
 
     Each axis is partitioned by its own commanded sign; an axis near zero is
     exactly zero here (no implicit deadband). For velocity use 2 linear axes in
-    m/s and yaw separately in rad/s; mixed-unit vectors are rejected by convention.
+    m/s and yaw separately in rad/s; the caller must keep differently dimensioned axes in separate signals.
     """
     if (command.timestamps, command.sample_rate_hz, command.segments, command.unit) != (
         measured.timestamps,
@@ -166,5 +175,5 @@ def tracking_mae(command: Signal, measured: Signal) -> dict[str, tuple[float, ..
                 if (1 if row[axis] > 0 else -1 if row[axis] < 0 else 0) == sign
             ]
             if selected:
-                result[f"axis_{axis}/{name}"] = (math.fsum(selected) / len(selected),)
+                result[f"axis_{axis}/{name}"] = (_average(selected),)
     return result
