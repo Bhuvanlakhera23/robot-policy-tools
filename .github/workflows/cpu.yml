@@ -1,0 +1,26 @@
+name: CPU package checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install setuptools wheel -r requirements-dev.txt
+      - run: python -m pip wheel --no-deps --no-build-isolation --wheel-dir dist .
+      - run: python -m pip install --no-deps dist/*.whl
+      - run: python -m unittest discover -s tests -v
+      - run: python examples/synthetic.py
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy

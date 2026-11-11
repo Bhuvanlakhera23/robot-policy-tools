@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=59.6", "wheel>=0.37"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src/robot_policy_tools", "examples/synthetic.py"]
