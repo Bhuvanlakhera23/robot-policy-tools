@@ -16,8 +16,7 @@ claim of affiliation. An initial exact-name search did not identify an obvious
 same-name project; registry availability/trademark clearance is unestablished.
 Do not upload under this name without owner review.
 
-First-party license recommendation: **MIT**, because this is a small reusable
-software library. This is only a recommendation; no license has been selected or
-granted. Owner/institutional source-rights confirmation, an explicit license choice,
-and exact-file approval are required before any public release. No LICENSE file
-or SPDX grant is fabricated. `RELEASE_BOUNDARY.json` records the pending decision.
+First-party source and documentation use MIT; see LICENSE. Source-rights, license
+and exact-content publication authority must be recorded in the owner release
+receipt. This grant does not cover excluded research artifacts or third-party
+software. `RELEASE_BOUNDARY.json` records the release scope.

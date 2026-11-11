@@ -1,12 +1,11 @@
-# Robot policy tools — local source candidate
+# Robot policy tools
 
 Validate declared policy interfaces and summarize offline sampled signals without
 loading a policy, simulator, ROS graph or hardware transport. For robotics
 researchers and engineers reviewing observation/action boundaries and evaluation
 logs. It does not evaluate a learned policy or certify robot safety.
 
-**Local owner review only. No first-party source license has been assigned.**
-The working name is provisional, unaffiliated and not a registry reservation.
+This independent project is unaffiliated with robot manufacturers.
 Runtime dependencies: Python 3.10+ standard library only. Inputs are nested Python
 sequences (`array.tolist()` for external array libraries).
 
@@ -96,8 +95,7 @@ A contract passing does not authorize actuation or prove an actuator received it
 
 ## License and attribution
 
-No first-party license is granted for this local candidate. MIT is recommended,
-subject to explicit owner/institutional source-rights and publication approval.
+Licensed under [MIT](LICENSE). Copyright © 2026 Bhuvan Lakhera.
 No third-party source is vendored. See [provenance](PROVENANCE.md),
 [license recommendation](LICENSE_RECOMMENDATION.md) and
 [release boundary](RELEASE_BOUNDARY.json). `approved_for_actuation: false`.

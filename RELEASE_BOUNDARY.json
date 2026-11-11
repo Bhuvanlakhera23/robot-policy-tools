@@ -1,9 +1,9 @@
 {
   "disposition": "READY_FOR_OWNER_RELEASE_REVIEW",
   "technical_scope": "CPU-testable generic contracts and mathematical signal summaries",
-  "first_party_license": "PENDING_EXPLICIT_OWNER_DECISION",
-  "license_recommendation": "MIT, subject to owner/institutional review; not assigned",
-  "publication_authorized": false,
+  "first_party_license": "MIT",
+  "license_recommendation": "MIT selected under explicit owner release authority",
+  "publication_authorized": true,
   "approved_for_actuation": false,
   "excluded": [
     "private research code",
@@ -14,8 +14,5 @@
     "unpublished logs"
   ],
   "technical_status": "CPU package build/install/tests/type/lint/example verified; no robotics runtime claim",
-  "release_blockers": [
-    "Explicit first-party license decision",
-    "Owner/institutional source-rights confirmation and exact content publication approval"
-  ]
+  "release_blockers": []
 }
